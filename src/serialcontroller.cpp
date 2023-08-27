@@ -17,13 +17,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#include "serialmididevice.h"
+#include "serialcontroller.h"
 #include <circle/sysconfig.h>
 #include <assert.h>
 
-CSerialController::CSerialController (CMiniSynthesizer *pSynthesizer, CInterruptSystem *pInterrupt,
-				      CSynthConfig *pConfig)
-:	CMIDIDevice (pSynthesizer, pConfig),
+#define CONTROLLER_BAUD 115200		// Set here the Baud Rate of the controller!
+
+CSerialController::CSerialController (CMiniSynthesizer *pSynthesizer, CInterruptSystem *pInterrupt)
+:
 #if RASPPI <= 3 && defined (USE_USB_FIQ)
 	m_Serial (pInterrupt, FALSE),
 #else
@@ -40,7 +41,7 @@ CSerialController::~CSerialController (void)
 
 boolean CSerialController::Initialize (void)
 {
-	return m_Serial.Initialize (31250);
+	return m_Serial.Initialize (CONTROLLER_BAUD);
 }
 
 void CSerialController::Process (void)
@@ -53,8 +54,7 @@ void CSerialController::Process (void)
 		return;
 	}
 
-	// Process MIDI messages
-	// See: https://www.midi.org/specifications/item/table-1-summary-of-midi-message
+	// Process Serial messages -> TODO
 	for (int i = 0; i < nResult; i++)
 	{
 		u8 uchData = Buffer[i];
@@ -84,7 +84,7 @@ void CSerialController::Process (void)
 			if (   (m_SerialMessage[0] & 0xE0) == 0xC0
 			    || m_nSerialState == 3)		// message is complete
 			{
-				MIDIMessageHandler (m_SerialMessage, m_nSerialState);
+				//MIDIMessageHandler (m_SerialMessage, m_nSerialState);
 
 				m_nSerialState = 0;
 			}

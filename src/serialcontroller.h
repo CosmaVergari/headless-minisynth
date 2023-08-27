@@ -17,21 +17,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-#ifndef _serialmididevice_h
-#define _serialmididevice_h
+#ifndef _serialcontroller_h
+#define _serialcontroller_h
 
-#include "mididevice.h"
 #include <circle/interrupt.h>
 #include <circle/serial.h>
 #include <circle/types.h>
 
 class CMiniSynthesizer;
 
-class CSerialController : public CMIDIDevice
+class CSerialController
 {
 public:
-	CSerialController (CMiniSynthesizer *pSynthesizer, CInterruptSystem *pInterrupt,
-			   CSynthConfig *pConfig);
+	CSerialController (CMiniSynthesizer *pSynthesizer, CInterruptSystem *pInterrupt);
 	~CSerialController (void);
 
 	boolean Initialize (void);

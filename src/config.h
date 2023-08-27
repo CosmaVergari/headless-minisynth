@@ -23,7 +23,7 @@
 #define SAMPLE_RATE		48000		// overall system clock
 
 #if RASPPI >= 2
-	#define VOICES_PER_CORE	6		// polyphonic voices per CPU core
+	#define VOICES_PER_CORE	3		// polyphonic voices per CPU core
 #else
 	#define VOICES_PER_CORE	4		// polyphonic voices (1 core only)
 #endif

@@ -73,6 +73,7 @@ void CMIDIKeyboard::Process (boolean bPlugAndPlayUpdated)
 void CMIDIKeyboard::MIDIPacketHandler0 (unsigned nCable, u8 *pPacket, unsigned nLength)
 {
 	assert (s_pThis[0] != 0);
+	 // MIDIMessageHandler è ereditato dalla superclasse MIDIDevice!
 	s_pThis[0]->MIDIMessageHandler (pPacket, nLength);
 }
 

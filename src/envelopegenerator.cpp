@@ -113,7 +113,7 @@ void CEnvelopeGenerator::NextSample (void)
 			m_State = EnvelopeStateSustain;
 		}
 
-		if (m_fOutputLevel == 0.0)
+		if (m_fOutputLevel == 0.0) // Forse è troppo stringente, metterei: < (piccola frazione)
 		{
 			m_State = EnvelopeStateIdle;
 		}

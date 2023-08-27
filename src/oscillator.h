@@ -43,8 +43,10 @@ public:
 	~COscillator (void);
 
 	void SetWaveform (TWaveform Waveform);
-	void SetFrequency (float fFrequency);			// in Hz
+	void SetMIDINote (unsigned uMIDINote);			// MIDI note number
+	void SetFrequency (float fFrequency);		// in Hz
 	void SetDetune (float fDetune);				// [-1.0, 1.0]
+	void SetOctave (int iOctave);			// [-3, +2]
 	void SetModulationVolume (float fVolume);		// [0.0, 1.0]
 
 	void NextSample (void);
@@ -56,7 +58,9 @@ private:
 	TWaveform m_Waveform;
 	float m_fFrequency;
 	float m_fMidFrequency;
+	unsigned m_uMIDINote;
 	float m_fDetune;
+	float m_fOctave;
 	float m_fModulationVolume;
 
 	unsigned m_nSampleCount;
