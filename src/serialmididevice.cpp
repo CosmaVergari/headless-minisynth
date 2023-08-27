@@ -21,7 +21,7 @@
 #include <circle/sysconfig.h>
 #include <assert.h>
 
-CSerialController::CSerialController (CMiniSynthesizer *pSynthesizer, CInterruptSystem *pInterrupt,
+CSerialMIDIDevice::CSerialMIDIDevice (CMiniSynthesizer *pSynthesizer, CInterruptSystem *pInterrupt,
 				      CSynthConfig *pConfig)
 :	CMIDIDevice (pSynthesizer, pConfig),
 #if RASPPI <= 3 && defined (USE_USB_FIQ)
@@ -33,17 +33,17 @@ CSerialController::CSerialController (CMiniSynthesizer *pSynthesizer, CInterrupt
 {
 }
 
-CSerialController::~CSerialController (void)
+CSerialMIDIDevice::~CSerialMIDIDevice (void)
 {
 	m_nSerialState = 255;
 }
 
-boolean CSerialController::Initialize (void)
+boolean CSerialMIDIDevice::Initialize (void)
 {
 	return m_Serial.Initialize (31250);
 }
 
-void CSerialController::Process (void)
+void CSerialMIDIDevice::Process (void)
 {
 	// Read serial MIDI data
 	u8 Buffer[100];

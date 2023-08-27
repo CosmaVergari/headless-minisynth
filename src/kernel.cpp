@@ -18,7 +18,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 #include "kernel.h"
-#include "mainwindow.h"
 #include "config.h"
 #include <circle/machineinfo.h>
 #include <circle/string.h>
@@ -34,7 +33,6 @@ CKernel::CKernel (void)
 	m_I2CMaster (CMachineInfo::Get ()->GetDevice (DeviceI2CMaster), TRUE),
 	m_USBHCI (&m_Interrupt, &m_Timer, TRUE),
 	m_EMMC (&m_Interrupt, &m_Timer, &m_ActLED),
-	m_GUI (&m_Screen, &m_Interrupt),
 	m_Config (&m_FileSystem),
 	m_pSynthesizer (0)
 {
@@ -105,8 +103,7 @@ boolean CKernel::Initialize (void)
 	if (bOK)
 	{
 		m_RPiTouchScreen.Initialize ();
-
-		bOK = m_GUI.Initialize ();
+		// TODO : initialize display
 	}
 
 	if (bOK)
@@ -167,8 +164,7 @@ TShutdownMode CKernel::Run (void)
 
 	m_pSynthesizer->Start ();
 
-	CMainWindow MainWindow (m_pSynthesizer, &m_Config);
-	m_GUI.Update (FALSE);
+	// TODO: first display update
 
 #ifndef SCREENSHOT_AFTER_SECS
 	while (m_pSynthesizer->IsActive ())
@@ -182,10 +178,10 @@ TShutdownMode CKernel::Run (void)
 
 		if (m_pSynthesizer->ConfigUpdated ())
 		{
-			MainWindow.UpdateAllParameters (TRUE);
+			// TODO: Update display (was MainWindow update)
 		}
 
-		m_GUI.Update (bUpdated);
+		// TODO: continuous diplay update (needed?)
 
 		m_CPUThrottle.Update ();
 

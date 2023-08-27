@@ -32,7 +32,7 @@ CMiniSynthesizer::CMiniSynthesizer (CSynthConfig *pConfig, CInterruptSystem *pIn
 :	m_pConfig (pConfig),
 	m_MIDIKeyboard0 (this, pConfig, 0),
 	m_MIDIKeyboard1 (this, pConfig, 1),
-	m_Keyboard (this),
+	m_Keyboard (this), // TODO: add SerialController under this line
 	m_SerialMIDI (this, pInterrupt, pConfig),
 	m_bUseSerial (FALSE),
 	m_nConfigRevisionWrite (0),

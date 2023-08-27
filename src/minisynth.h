@@ -79,7 +79,7 @@ private:
 	CMIDIKeyboard m_MIDIKeyboard1;
 	CPCKeyboard   m_Keyboard;
 
-	CSerialController m_SerialMIDI;
+	CSerialMIDIDevice m_SerialMIDI;
 	boolean m_bUseSerial;
 
 	unsigned m_nConfigRevisionWrite;

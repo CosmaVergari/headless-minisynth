@@ -27,12 +27,12 @@
 
 class CMiniSynthesizer;
 
-class CSerialController : public CMIDIDevice
+class CSerialMIDIDevice : public CMIDIDevice
 {
 public:
-	CSerialController (CMiniSynthesizer *pSynthesizer, CInterruptSystem *pInterrupt,
+	CSerialMIDIDevice (CMiniSynthesizer *pSynthesizer, CInterruptSystem *pInterrupt,
 			   CSynthConfig *pConfig);
-	~CSerialController (void);
+	~CSerialMIDIDevice (void);
 
 	boolean Initialize (void);
 
