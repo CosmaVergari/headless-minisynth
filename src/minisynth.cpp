@@ -33,7 +33,7 @@ CMiniSynthesizer::CMiniSynthesizer (CSynthConfig *pConfig, CInterruptSystem *pIn
 	m_MIDIKeyboard0 (this, pConfig, 0),
 	m_MIDIKeyboard1 (this, pConfig, 1),
 	m_Keyboard (this), // TODO: add SerialController under this line
-	m_SerialMIDI (this, pInterrupt, pConfig),
+	m_SerialController(this, pInterrupt),
 	m_bUseSerial (FALSE),
 	m_nConfigRevisionWrite (0),
 	m_nConfigRevisionRead (0),
@@ -51,16 +51,18 @@ CMiniSynthesizer::~CMiniSynthesizer (void)
 
 boolean CMiniSynthesizer::Initialize (void)
 {
-	if (m_SerialMIDI.Initialize ())
+	if (m_SerialController.Initialize ())
 	{
-		CLogger::Get ()->Write (FromMiniSynth, LogNotice, "Serial MIDI interface enabled");
+		CLogger::Get ()->Write (FromMiniSynth, LogNotice, "Serial Controller interface enabled");
 
 		m_bUseSerial = TRUE;
 
 		return m_VoiceManager.Initialize ();
 	}
 
+	CLogger::Get ()->Write (FromMiniSynth, LogNotice, "MiniSynth Serial Controller initialization failed");
 	return FALSE;
+	//return m_VoiceManager.Initialize ();
 }
 
 void CMiniSynthesizer::Process (boolean bPlugAndPlayUpdated)
@@ -72,7 +74,7 @@ void CMiniSynthesizer::Process (boolean bPlugAndPlayUpdated)
 
 	if (m_bUseSerial)
 	{
-		m_SerialMIDI.Process ();
+		m_SerialController.Process ();
 	}
 }
 

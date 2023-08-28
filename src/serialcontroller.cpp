@@ -58,40 +58,19 @@ void CSerialController::Process (void)
 	for (int i = 0; i < nResult; i++)
 	{
 		u8 uchData = Buffer[i];
+		if (uchData == 'c') {
+			m_Serial.Write("ciao", 4);
+		}
 
+		// TODO: implement FSM accorind to serial_protocol spec
 		switch (m_nSerialState)
 		{
 		case 0:
-		MIDIRestart:
-			if (   (uchData & 0x80) == 0x80		// status byte, all channels
-			    && (uchData & 0xF0) != 0xF0)	// ignore system messages
-			{
-				m_SerialMessage[m_nSerialState++] = uchData;
-			}
-			break;
-
 		case 1:
 		case 2:
-			if (uchData & 0x80)			// got status when parameter expected
-			{
-				m_nSerialState = 0;
-
-				goto MIDIRestart;
-			}
-
-			m_SerialMessage[m_nSerialState++] = uchData;
-
-			if (   (m_SerialMessage[0] & 0xE0) == 0xC0
-			    || m_nSerialState == 3)		// message is complete
-			{
-				//MIDIMessageHandler (m_SerialMessage, m_nSerialState);
-
-				m_nSerialState = 0;
-			}
-			break;
 
 		default:
-			assert (0);
+			//assert (0);
 			break;
 		}
 	}

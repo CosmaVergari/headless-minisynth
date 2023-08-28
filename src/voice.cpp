@@ -44,13 +44,12 @@ void CVoice::SetPatch (CPatch *pPatch)
 	m_LFO_VCO.SetWaveform ((TWaveform) pPatch->GetParameter (LFOVCOWaveform));
 	m_LFO_VCO.SetFrequency (pPatch->GetParameter (LFOVCOFrequency));
 
-	m_VCO.SetWaveform ((TWaveform) pPatch->GetParameter (VCOWaveform));
-	m_VCO.SetModulationVolume (pPatch->GetParameter (VCOModulationVolume) / 100.0);
+	m_VCO.SetWaveform ((TWaveform) pPatch->GetParameter (VCO1Waveform));
+	m_VCO.SetModulationVolume (pPatch->GetParameter (VCO1ModulationVolume) / 100.0);
+	m_VCO.SetOctave (static_cast<int>(pPatch->GetParameter (VCO1Octave)) - 3);
+	m_VCO.SetDetune (pPatch->GetParameter (VCO1FineTune) / 100.0 - 1.0);
 
-	m_VCO2.SetWaveform ((TWaveform) pPatch->GetParameter (VCOWaveform));
-	m_VCO2.SetModulationVolume (pPatch->GetParameter (VCOModulationVolume) / 100.0);
-	m_VCO2.SetDetune (pPatch->GetParameter (VCODetune) / 100.0 - 1.0);
-	// TODO: Add SetOctave and octave in patch
+	// TODO: Add VCOs 2, 3, 4
 
 	// VCF
 	m_LFO_VCF.SetWaveform ((TWaveform) pPatch->GetParameter (LFOVCFWaveform));

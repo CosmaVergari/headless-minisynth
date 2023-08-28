@@ -33,13 +33,16 @@ static const struct
 }
 ParameterList[] =		// must match TSynthParameter
 {
+	// Name, Type, Minimum, Maximum, Step, Default, Help string
+
 	// VCO
 	{"LFOVCOWaveform", ParameterWaveform, WaveformSine, WaveformPulse25, 1, WaveformSine, "Wave"},
 	{"LFOVCOFrequency", ParameterFrequency, 1, 35, 1, 20, "Rate"},
-
-	{"VCOWaveform", ParameterWaveform, WaveformSine, WaveformUnknown-1, 1, WaveformSquare, "Wave"},
-	{"VCOModulationVolume", ParameterPercent, 0, 100, 10, 0, "Volume"},
-	{"VCODetune", ParameterPercent, 0, 200, 2, 100, "Detune"},
+	
+	{"VCO1Waveform", ParameterWaveform, WaveformSine, WaveformUnknown-1, 1, WaveformSquare, "Wave 1"},
+	{"VCO1ModulationVolume", ParameterPercent, 0, 100, 10, 0, "Volume 1"},
+	{"VCO1Octave", ParameterPercent, 0, 5, 1, 3, "Octave 1"},
+	{"VCO1FineTune", ParameterPercent, 0, 200, 2, 100, "Fine Tune 1"},
 
 	// VCF
 	{"LFOVCFWaveform", ParameterWaveform, WaveformSine, WaveformPulse25, 1, WaveformSine, "Wave"},
