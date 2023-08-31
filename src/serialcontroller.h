@@ -26,6 +26,15 @@
 
 class CMiniSynthesizer;
 
+enum SerialState {
+	START=0,
+	READ_ADDRESS,
+	READ_VALUE1,
+	READ_VALUE2,
+	READ_STOP,
+	SERIAL_UNKNOWN
+};
+
 class CSerialController
 {
 public:
@@ -38,8 +47,9 @@ public:
 
 private:
 	CSerialDevice m_Serial;
-	unsigned m_nSerialState;
-	u8 m_SerialMessage[3];
+	SerialState m_nSerialState;
+	u8 m_uControlAddress;
+	u16 m_uControlValue;
 };
 
 #endif
